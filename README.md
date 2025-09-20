@@ -23,6 +23,11 @@ This repository contains a collection of Python projects focused on AI, automati
 
 ### 🛠️ Development Tools & Utilities
 
+#### `development-tools/` - IDE Launchers & Dev Tools
+- **Description**: Development environment launchers and IDE utilities
+- **Features**: PowerShell AI IDE launchers, batch scripts, error handling
+- **Status**: ✅ Production ready
+
 #### `demo-services/` - Microservice Demos
 - **Description**: Lightweight service demonstrations and prototypes
 - **Features**: Docker support, testing frameworks
