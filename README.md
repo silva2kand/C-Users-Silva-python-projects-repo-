@@ -38,7 +38,38 @@ This repository contains a collection of Python projects focused on AI, automati
 - **Features**: Jupyter notebook integration, runtime intelligence
 - **Status**: 🧪 Research and experiments
 
-## 🚀 Quick Start
+#### `documents-ai-collection/` - Comprehensive AI Development Files
+- **Description**: Large collection of AI assistants, desktop automation tools, and specialized clients
+- **Features**: 46 Python files including CiniForge integration, testing frameworks, GUI tools
+- **Status**: 📚 Archived development history
+
+#### `ide-core-system/` - IDE Intelligence Core
+- **Description**: Core Python files for notebook AI integration and runtime optimization
+- **Features**: AI-powered code completion, performance optimization, intelligent debugging
+- **Status**: 🧠 Core system components
+
+#### `video-ai-remaker/` - AI Video Processing System
+- **Description**: Complete hybrid AI video remaking system with multi-provider support
+- **Features**: AI-powered video analysis, FastAPI service, comprehensive testing suite
+- **Status**: 🎬 Production video processing system
+
+## � Repository Summary
+
+This repository now contains **130+ Python files** across **8 major project categories**:
+
+- **Legion AI Agent Swarm**: 23 files - Complete AI orchestration system
+- **Hybrid AI Services**: 15 files - Multi-provider AI integration platform  
+- **Desktop AI Assistant**: 5 files - Voice-enabled desktop automation
+- **Development Tools**: 19 files - IDE launchers and development utilities
+- **Demo Services**: 6 files - Microservice prototypes and testing
+- **AI Experiments**: 2 files - Notebook integration and runtime intelligence
+- **Documents AI Collection**: 46 files - Comprehensive AI development archive
+- **IDE Core System**: 2 files - Core intelligence and optimization
+- **Video AI Remaker**: 5 files - Professional video processing with AI
+
+Total: **123 Python files** representing a complete AI development ecosystem.
+
+## �🚀 Quick Start
 
 Each project directory contains its own README with specific setup instructions.
 
