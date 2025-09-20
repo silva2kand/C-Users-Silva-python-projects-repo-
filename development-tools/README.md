@@ -7,6 +7,7 @@ Collection of development environment launchers and IDE tools.
 ### PowerShell AI IDE
 - **`Launch_IDE.bat`** - Simple batch launcher for PowerShell AI IDE
 - **`Launch_IDE.ps1`** - Advanced PowerShell launcher with error handling and logging
+- **`PowerShell-AI-IDE-Shortcut.bat`** - Recreates PowerShell AI IDE.lnk functionality
 
 ### Smart AI IDE
 - **`Smart-AI-IDE-Shortcut.bat`** - Recreates Smart AI IDE.lnk functionality  
@@ -15,43 +16,79 @@ Collection of development environment launchers and IDE tools.
 - **`Smart-AI-IDE-Launcher.bat`** - Main Smart AI IDE launcher
 - **`launch-smart-ai-ide.ps1`** - PowerShell Smart AI IDE launcher
 
+### Smart AI IDE Integrated
+- **`launch-smart-ide.ps1`** - Integrated Smart IDE launcher
+- **`start-all-services.ps1`** - Launch all services at once
+- **`start-smart-ide.bat`** - Batch launcher for integrated Smart IDE
+- **`holo-desktop.ps1`** - HoloLens-style desktop interface
+- **`holo-voice-desktop.ps1`** - Voice-enabled holo desktop
+
+### AI Assistant
+- **`AI_Assistant_Launcher.vbs`** - VBScript launcher (silent execution)
+- **`Start_AI_Assistant.bat`** - Batch launcher for AI Assistant
+- **`AI-Assistant-Launcher-Shortcut.bat`** - Recreates VBScript functionality
+
+### Hybrid AI Video Remaker
+- **`Launch_Video_AI.ps1`** - PowerShell launcher for video AI
+- **`Hybrid-AI-Video-Remaker-Shortcut.bat`** - Recreates shortcut functionality
+
+### Development Setup
+- **`setup-smart-ai-ide.js`** - Node.js setup script for Smart AI IDE integration
+
 ## 🛠️ Features
 
-### Launch_IDE.bat
+### PowerShell AI IDE
 - Quick launch via batch file
 - Bypasses PowerShell execution policy
-- Simple pause for error viewing
-
-### Launch_IDE.ps1  
 - Comprehensive error checking
-- Colored console output
-- Path validation
-- Detailed logging
-- Graceful error handling
+- Colored console output and logging
 
-### Smart AI IDE Launchers
-- **Smart-AI-IDE-FAST.bat**: Multi-API AI agent with 5 free tier APIs
-- **Auto-switching**: Automatic failover between AI providers
+### Smart AI IDE Family
+- **Multi-API AI agent**: 5 free tier APIs with auto-switching
 - **Voice support**: Conversational AI with speech capabilities
 - **Auto-fix agent**: Validates and fixes code until 100% perfect
-- **Desktop GUI**: Standalone operation with AI simulation
+- **Desktop GUI**: Standalone operation in Edge/Chrome/default browser
 - **Port management**: Automatic cleanup and process management
+- **Fast mode**: Skip dependency checks for quick startup
 
-### Smart AI IDE Features
-- 🤖 Multi-API AI Development Agent (5 APIs available)
-- 💬 Conversational AI with voice support
-- 🔍 Auto-fix agent for code validation
-- 🖥️ Desktop GUI in Edge/Chrome/default browser
-- ⚡ Fast mode: Skip dependency checks
-- 🧹 Automatic port cleanup and process management
+### AI Assistant Tools
+- **Silent execution**: VBScript launcher runs without console windows
+- **Python integration**: Direct execution of AI assistant Python scripts
+- **Error handling**: Fallback mechanisms for missing files
+- **Desktop automation**: Full desktop AI assistant capabilities
+
+### Hybrid AI Video Remaker
+- **Video processing**: AI-powered video editing and enhancement
+- **Streaming support**: Real-time video processing capabilities
+- **File processing**: Batch video operations
+- **AI generation**: AI-assisted video creation
+
+### Smart AI IDE Integrated
+- **HoloLens interface**: 3D desktop experience
+- **Voice control**: Voice-enabled desktop interactions
+- **Multi-service**: Launch all integrated services simultaneously
+- **Gaming elements**: Halo-inspired interface components
+
+### Development Setup
+- **Project integration**: Combines multiple IDE components
+- **Authentication bridge**: Unified auth across services
+- **Security layer**: SuperAgent firewall integration
+- **Database setup**: Automated database configuration
+- **Environment config**: Automated environment variable setup
 
 ## 📋 Requirements
 
 - Windows PowerShell 5.1 or PowerShell 7+
-- PowerShell AI IDE installed at: `C:\Users\Silva\ide\GUI\MainWindow.ps1`
-- Smart AI IDE installed at: `C:\Users\Silva\Documents\smart-ai-ide\`
-- Node.js (for Smart AI IDE features)
+- Python 3.8+ (for AI Assistant and video processing)
+- Node.js 16+ (for Smart AI IDE and setup scripts)
 - Modern web browser (Edge, Chrome, Firefox)
+
+### Specific Requirements by Tool:
+- **PowerShell AI IDE**: `C:\Users\Silva\ide\GUI\MainWindow.ps1`
+- **Smart AI IDE**: `C:\Users\Silva\Documents\smart-ai-ide\`
+- **AI Assistant**: `C:\Users\Silva\Documents\desktop_ai_assistant_final.py`
+- **Video Remaker**: `C:\Users\Silva\hybrid_ai_video_remaker\`
+- **Smart IDE Integrated**: `C:\Users\Silva\Desktop\smart-ai-ide-integrated\`
 
 ## 🎯 Usage
 
