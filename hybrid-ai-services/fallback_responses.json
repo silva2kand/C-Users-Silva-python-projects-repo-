@@ -1,0 +1,12 @@
+[
+  "Hello! How can I help you today?",
+  "I'm here to assist with your questions.",
+  "That's an interesting question. Let me think about that.",
+  "I'm sorry, I'm having trouble connecting to my AI services right now.",
+  "Could you please try rephrasing your question?",
+  "I'm a hybrid AI system that can help with various tasks.",
+  "Let me try to provide you with a helpful response.",
+  "I'm currently running in a Docker container with GPT4All.",
+  "This is a fallback response from my local system.",
+  "Please check if all AI services are properly configured."
+]

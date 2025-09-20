@@ -1,0 +1,62 @@
+legion/
+├── __init__.py
+├── core.py              # Main LegionCore class
+├── journal.py           # Journal system
+├── context_engine.py    # Context awareness engine
+├── message_bus.py       # Pub/Sub communication
+├── orchestrator.py      # Agent orchestration
+├── model_manager.py     # LLM model management
+└── cli.py              # Command line interface
+
+agents/
+├── __init__.py
+├── base_agent.py        # Base agent class
+├── context_agent.py     # Context gathering agent
+├── completion_agent.py  # Code completion agent
+├── refactor_agent.py    # Refactoring agent
+├── test_gen_agent.py    # Test generation agent
+├── review_agent.py      # Code review agent
+├── narrator_agent.py    # Voice narration agent
+└── fixer_shell.py       # Error fixing agent
+
+dashboard/
+├── __init__.py
+├── app.py              # Flask dashboard app
+├── static/
+│   ├── css/
+│   ├── js/
+│   └── img/
+└── templates/
+    ├── base.html
+    ├── dashboard.html
+    └── agent_status.html
+
+config/
+├── default_profile.yaml
+├── legion_config.yaml
+└── model_priorities.yaml
+
+utils/
+├── __init__.py
+├── git_utils.py        # Git operations for rollback
+├── vector_store.py     # Vector database utilities
+├── tts_engine.py       # Text-to-speech utilities
+└── file_watcher.py     # Project file monitoring
+
+tests/
+├── __init__.py
+├── test_core.py
+├── test_agents.py
+├── test_context.py
+└── test_journal.py
+
+scripts/
+├── setup.py
+├── install_deps.sh
+└── init_project.sh
+
+docs/
+├── architecture.md
+├── agent_guide.md
+├── api_reference.md
+└── troubleshooting.md

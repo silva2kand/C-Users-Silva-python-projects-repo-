@@ -1,0 +1,67 @@
+# Common Python dependencies for AI projects
+
+# Web frameworks
+fastapi>=0.104.0
+uvicorn>=0.24.0
+requests>=2.31.0
+
+# GUI frameworks
+PyQt5>=5.15.9
+tkinter-tooltip>=2.0.0
+
+# AI and ML libraries
+gpt4all>=2.8.2
+openai>=1.0.0
+anthropic>=0.7.0
+google-generativeai>=0.3.0
+transformers>=4.35.2
+torch>=2.1.1
+accelerate>=0.24.1
+diffusers>=0.24.0
+scipy>=1.11.4
+numpy>=1.26.2
+
+# Image and video processing
+pillow>=10.1.0
+opencv-python>=4.8.1.78
+moviepy>=2.2.1
+
+# Data processing
+pandas>=2.1.0
+beautifulsoup4>=4.12.2
+feedparser>=6.0.10
+
+# Voice and speech
+speechrecognition>=3.10.0
+pyttsx3>=2.90
+
+# Language tools
+googletrans>=4.0.0rc1
+langdetect>=1.0.9
+
+# Video downloading
+yt-dlp>=2023.12.30
+
+# Google APIs
+google-auth>=2.23.4
+google-api-python-client>=2.108.0
+
+# Development tools
+pytest>=7.4.0
+black>=23.0.0
+flake8>=6.0.0
+
+# Async and HTTP
+aiohttp>=3.9.0
+httpx>=0.25.0
+
+# Database
+sqlite3
+sqlalchemy>=2.0.0
+
+# Logging and monitoring
+loguru>=0.7.0
+
+# Configuration
+pyyaml>=6.0.1
+python-dotenv>=1.0.0

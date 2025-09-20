@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬 Hybrid AI Video Remaker</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .panel {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .panel h2 {
+            color: #4a4a4a;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Chat Panel */
+        .chat-container {
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-messages {
+            flex: 1;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #fafafa;
+            overflow-y: auto;
+            font-family: 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            resize: none;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .quick-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .quick-btn {
+            padding: 6px 12px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .quick-btn:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+        }
+
+        /* Video Panel */
+        .upload-area {
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            border-color: #764ba2;
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .upload-area.dragover {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.1);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .video-list {
+            max-height: 200px;
+            overflow-y: auto;
+            margin: 20px 0;
+        }
+
+        .video-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            background: #f8f9fa;
+        }
+
+        .video-info {
+            flex: 1;
+        }
+
+        .video-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .video-size {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .processing-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option-group label {
+            font-weight: 600;
+            color: #4a4a4a;
+        }
+
+        select, input[type="number"] {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .effects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .effect-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .effect-checkbox:hover {
+            background: #e9ecef;
+        }
+
+        .effect-checkbox input[type="checkbox"] {
+            margin: 0;
+        }
+
+        .progress-container {
+            margin: 20px 0;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .status-message {
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        /* Message bubbles */
+        .message {
+            margin: 10px 0;
+            padding: 12px 16px;
+            border-radius: 18px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.ai {
+            background: #e9ecef;
+            color: #333;
+            margin-right: auto;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.system {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+            text-align: center;
+            max-width: 100%;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .processing-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 Hybrid AI Video Remaker</h1>
+            <p>Professional Video Processing with AI Assistance</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Chat Panel -->
+            <div class="panel">
+                <h2><i class="fas fa-robot"></i> AI Chat Assistant</h2>
+                <div class="chat-container">
+                    <div id="chat-messages" class="chat-messages">
+                        <div class="message system">
+                            🤖 Welcome to Hybrid AI Video Remaker!<br>
+                            💡 I'm your AI assistant for video processing.<br>
+                            📝 Ask me anything about video editing, AI, or technical questions!
+                        </div>
+                    </div>
+
+                    <div class="quick-buttons">
+                        <button class="quick-btn" onclick="sendQuickMessage('What can you help me with?')">
+                            <i class="fas fa-question-circle"></i> Help
+                        </button>
+                        <button class="quick-btn" onclick="sendQuickMessage('Tell me about video processing')">
+                            <i class="fas fa-video"></i> Video Info
+                        </button>
+                        <button class="quick-btn" onclick="sendQuickMessage('Tell me about Docker')">
+                            <i class="fab fa-docker"></i> Docker
+                        </button>
+                        <button class="quick-btn" onclick="sendQuickMessage('How are you doing?')">
+                            <i class="fas fa-heart"></i> Status
+                        </button>
+                    </div>
+
+                    <div class="chat-input-area">
+                        <textarea id="chat-input" class="chat-input" placeholder="Type your message here..." rows="2"></textarea>
+                        <button id="send-btn" class="btn btn-primary" onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i> Send
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Processing Panel -->
+            <div class="panel">
+                <h2><i class="fas fa-film"></i> Video Processing</h2>
+
+                <!-- File Upload -->
+                <div class="upload-area" onclick="document.getElementById('file-input').click()">
+                    <i class="fas fa-cloud-upload-alt" style="font-size: 3em; color: #667eea; margin-bottom: 15px;"></i>
+                    <h3>Drop Video Files Here</h3>
+                    <p>or click to browse</p>
+                    <small>Supports: MP4, AVI, MOV, WMV, FLV, MKV</small>
+                </div>
+                <input type="file" id="file-input" class="file-input" accept=".mp4,.avi,.mov,.wmv,.flv,.mkv" multiple>
+
+                <!-- Video List -->
+                <div id="video-list" class="video-list"></div>
+
+                <!-- Processing Options -->
+                <div class="processing-options">
+                    <div class="option-group">
+                        <label for="format-select">Output Format:</label>
+                        <select id="format-select">
+                            <option value="mp4">MP4</option>
+                            <option value="avi">AVI</option>
+                            <option value="mov">MOV</option>
+                            <option value="wmv">WMV</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="quality-select">Quality:</label>
+                        <select id="quality-select">
+                            <option value="480p">Low (480p)</option>
+                            <option value="720p">Medium (720p)</option>
+                            <option value="1080p">High (1080p)</option>
+                            <option value="4k">Ultra (4K)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Effects -->
+                <div class="option-group">
+                    <label>Video Effects:</label>
+                    <div class="effects-grid">
+                        <label class="effect-checkbox">
+                            <input type="checkbox" id="brightness"> Brightness
+                        </label>
+                        <label class="effect-checkbox">
+                            <input type="checkbox" id="contrast"> Contrast
+                        </label>
+                        <label class="effect-checkbox">
+                            <input type="checkbox" id="saturation"> Saturation
+                        </label>
+                        <label class="effect-checkbox">
+                            <input type="checkbox" id="grayscale"> Grayscale
+                        </label>
+                        <label class="effect-checkbox">
+                            <input type="checkbox" id="sepia"> Sepia
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div id="progress-container" class="progress-container">
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                </div>
+
+                <!-- Status Message -->
+                <div id="status-message" class="status-message status-info" style="display: none;"></div>
+
+                <!-- Action Buttons -->
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button id="process-btn" class="btn btn-primary" onclick="processVideo()" disabled>
+                        <i class="fas fa-cog"></i> Process Video
+                    </button>
+                    <button id="preview-btn" class="btn btn-secondary" onclick="previewVideo()" disabled>
+                        <i class="fas fa-eye"></i> Preview
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let uploadedVideos = [];
+        let selectedVideo = null;
+
+        // Chat functionality
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            addMessage('user', message);
+            input.value = '';
+
+            // Show typing indicator
+            const typingDiv = addMessage('ai', '<div class="loading"></div> Thinking...');
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: message })
+                });
+
+                const data = await response.json();
+
+                // Remove typing indicator
+                typingDiv.innerHTML = data.response;
+                typingDiv.className = 'message ai';
+
+            } catch (error) {
+                typingDiv.innerHTML = '❌ Sorry, I encountered an error. Please try again.';
+                typingDiv.className = 'message ai';
+            }
+        }
+
+        function sendQuickMessage(message) {
+            document.getElementById('chat-input').value = message;
+            sendMessage();
+        }
+
+        function addMessage(type, content) {
+            const messagesDiv = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            messageDiv.innerHTML = content;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            return messageDiv;
+        }
+
+        // Enter key support for chat
+        document.getElementById('chat-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // File upload functionality
+        document.getElementById('file-input').addEventListener('change', handleFileSelect);
+        document.addEventListener('dragover', (e) => e.preventDefault());
+        document.addEventListener('drop', handleFileDrop);
+
+        function handleFileSelect(event) {
+            const files = event.target.files;
+            uploadFiles(files);
+        }
+
+        function handleFileDrop(event) {
+            event.preventDefault();
+            const files = event.dataTransfer.files;
+            uploadFiles(files);
+        }
+
+        async function uploadFiles(files) {
+            for (let file of files) {
+                if (!file.type.startsWith('video/')) continue;
+
+                const formData = new FormData();
+                formData.append('file', file);
+
+                try {
+                    showStatus('Uploading ' + file.name + '...', 'info');
+
+                    const response = await fetch('/api/upload', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        uploadedVideos.push(data);
+                        updateVideoList();
+                        showStatus('✅ ' + file.name + ' uploaded successfully!', 'success');
+                    } else {
+                        showStatus('❌ Upload failed: ' + data.error, 'error');
+                    }
+                } catch (error) {
+                    showStatus('❌ Upload error: ' + error.message, 'error');
+                }
+            }
+        }
+
+        function updateVideoList() {
+            const videoList = document.getElementById('video-list');
+            videoList.innerHTML = '';
+
+            uploadedVideos.forEach((video, index) => {
+                const videoDiv = document.createElement('div');
+                videoDiv.className = 'video-item';
+                videoDiv.innerHTML = `
+                    <div class="video-info">
+                        <div class="video-name">${video.filename}</div>
+                        <div class="video-size">${formatFileSize(video.size)}</div>
+                    </div>
+                    <button class="btn btn-secondary" onclick="selectVideo(${index})">
+                        <i class="fas fa-check"></i> Select
+                    </button>
+                `;
+                videoList.appendChild(videoDiv);
+            });
+
+            // Enable/disable buttons
+            const hasVideos = uploadedVideos.length > 0;
+            document.getElementById('process-btn').disabled = !hasVideos;
+            document.getElementById('preview-btn').disabled = !hasVideos;
+        }
+
+        function selectVideo(index) {
+            selectedVideo = uploadedVideos[index];
+            showStatus('Selected: ' + selectedVideo.filename, 'info');
+
+            // Highlight selected video
+            const videoItems = document.querySelectorAll('.video-item');
+            videoItems.forEach((item, i) => {
+                item.style.borderColor = i === index ? '#667eea' : '#e0e0e0';
+                item.style.backgroundColor = i === index ? '#f0f8ff' : '#f8f9fa';
+            });
+        }
+
+        async function processVideo() {
+            if (!selectedVideo) {
+                showStatus('❌ Please select a video first!', 'error');
+                return;
+            }
+
+            const options = {
+                format: document.getElementById('format-select').value,
+                quality: document.getElementById('quality-select').value,
+                effects: getSelectedEffects()
+            };
+
+            showStatus('⚡ Processing video...', 'info');
+            showProgress(true);
+            setProgress(30);
+
+            try {
+                const response = await fetch('/api/process', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        filename: selectedVideo.filename,
+                        options: options
+                    })
+                });
+
+                const data = await response.json();
+
+                setProgress(100);
+                if (response.ok) {
+                    showStatus('✅ ' + data.message, 'success');
+                    addMessage('system', '🎬 Video processing completed: ' + data.message);
+                } else {
+                    showStatus('❌ Processing failed: ' + data.error, 'error');
+                }
+
+            } catch (error) {
+                showStatus('❌ Processing error: ' + error.message, 'error');
+            }
+
+            setTimeout(() => showProgress(false), 2000);
+        }
+
+        function previewVideo() {
+            if (!selectedVideo) {
+                showStatus('❌ Please select a video first!', 'error');
+                return;
+            }
+
+            showStatus('👁️ Preview feature coming soon!', 'info');
+            addMessage('system', '📺 Video preview would open here for: ' + selectedVideo.filename);
+        }
+
+        function getSelectedEffects() {
+            const effects = [];
+            const checkboxes = ['brightness', 'contrast', 'saturation', 'grayscale', 'sepia'];
+            checkboxes.forEach(id => {
+                if (document.getElementById(id).checked) {
+                    effects.push(id);
+                }
+            });
+            return effects;
+        }
+
+        function showProgress(show) {
+            const container = document.getElementById('progress-container');
+            container.style.display = show ? 'block' : 'none';
+        }
+
+        function setProgress(percent) {
+            const fill = document.getElementById('progress-fill');
+            fill.style.width = percent + '%';
+        }
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('status-message');
+            statusDiv.textContent = message;
+            statusDiv.className = `status-message status-${type}`;
+            statusDiv.style.display = 'block';
+
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Load existing videos on page load
+        window.addEventListener('load', loadVideos);
+
+        async function loadVideos() {
+            try {
+                const response = await fetch('/api/videos');
+                const data = await response.json();
+                uploadedVideos = data.videos || [];
+                updateVideoList();
+            } catch (error) {
+                console.log('No existing videos found');
+            }
+        }
+    </script>
+</body>
+</html>

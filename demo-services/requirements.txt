@@ -1,0 +1,16 @@
+# Lightweight Ingest Service Dependencies
+# Total size impact: ~15MB
+
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+aiofiles==23.2.1
+python-multipart==0.0.6
+python-magic==0.4.27
+gitpython==3.1.40
+chardet==5.2.0
+requests==2.31.0
+
+# Optional: For advanced file analysis
+# pygments==2.17.2  # Syntax highlighting
+# tree-sitter==0.20.4  # Code parsing

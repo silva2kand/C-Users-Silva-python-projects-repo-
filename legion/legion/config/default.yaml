@@ -1,0 +1,92 @@
+# Legion Configuration File
+# This file contains default settings for the Legion AI Agent Swarm
+
+# Model Configuration
+models:
+  # Ollama (Local AI) - Primary choice for offline-first approach
+  ollama:
+    enabled: true
+    host: "http://localhost:11434"
+    model: "codellama:7b"
+    timeout: 30
+    temperature: 0.1
+
+  # OpenAI - Cloud fallback
+  openai:
+    enabled: false
+    model: "gpt-4"
+    api_key: ""  # Set via environment variable: OPENAI_API_KEY
+    timeout: 30
+    temperature: 0.1
+
+  # OpenRouter - Free-tier cloud fallback
+  openrouter:
+    enabled: false
+    model: "anthropic/claude-3-haiku"
+    api_key: ""  # Set via environment variable: OPENROUTER_API_KEY
+    timeout: 30
+    temperature: 0.1
+
+  # Anthropic Claude - Direct API
+  anthropic:
+    enabled: false
+    model: "claude-3-sonnet-20240229"
+    api_key: ""  # Set via environment variable: ANTHROPIC_API_KEY
+    timeout: 30
+    temperature: 0.1
+
+  # Google Gemini
+  google:
+    enabled: false
+    model: "gemini-pro"
+    api_key: ""  # Set via environment variable: GOOGLE_API_KEY
+    timeout: 30
+    temperature: 0.1
+
+# Journal Configuration
+journal:
+  enabled: true
+  path: "./.legion/logs"
+  max_entries: 10000
+  enable_narration: false
+  log_level: "INFO"
+
+# Context Engine Configuration
+context_engine:
+  vector_db: "chromadb"  # Options: chromadb, lancedb, or None
+  index_all_files: true
+  max_context_length: 4000
+  chunk_size: 1000
+  chunk_overlap: 200
+  supported_extensions: [".py", ".js", ".ts", ".java", ".cpp", ".c", ".go", ".rs"]
+  exclude_patterns: ["__pycache__", "node_modules", ".git", "build", "dist"]
+
+# Agent Configuration
+agents:
+  default_timeout: 60
+  max_concurrent_agents: 3
+  auto_cleanup: true
+  enable_rollback: true
+
+# Dashboard Configuration
+dashboard:
+  enabled: false
+  host: "localhost"
+  port: 8080
+  theme: "dark"
+  enable_websockets: true
+
+# Development Configuration
+development:
+  debug_mode: false
+  enable_profiling: false
+  log_requests: true
+  enable_cors: true
+
+# User Experience
+ux:
+  enable_voice_feedback: false
+  voice_speed: 1.0
+  voice_pitch: 1.0
+  show_progress_bars: true
+  enable_animations: true
